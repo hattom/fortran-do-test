@@ -46,12 +46,13 @@ SOURCE_CXX = kernel_c.cpp
 OBJ_F90 = $(SOURCE_F90:.F90=.o)
 OBJ_CXX = $(SOURCE_CXX:.cpp=.o)
 
+EXEC = test_do
 .DEFAULT_GOAL = all
 .PHONY: all clean
-all: bin
+all: $(EXEC)
 
-bin: $(OBJ_F90) $(OBJ_CXX)
-	$(LD) -o a.out $(LDFLAGS) $^
+$(EXEC): $(OBJ_F90) $(OBJ_CXX)
+	$(LD) -o $@ $(LDFLAGS) $^
 
 %.o: %.F90
 	$(FC) -c $(FFLAGS) -o $@ $^
